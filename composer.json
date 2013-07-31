@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": ">5.4.1",
+        "php": ">=5.4.0",
         "zf-commons/zfc-base": "*",
         "zendframework/zend-view": "2.*",
         "zendframework/zend-http": "2.*",

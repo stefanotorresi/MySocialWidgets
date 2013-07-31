@@ -8,7 +8,6 @@
 namespace MySocialWidgets;
 
 use Zend\ModuleManager\Feature;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Glob;
 use ZfcBase\Module\AbstractModule;

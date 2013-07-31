@@ -17,7 +17,7 @@ class CacheAdapterFactory implements FactoryInterface
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return AbstractAdapter
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
