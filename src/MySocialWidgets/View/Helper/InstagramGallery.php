@@ -27,6 +27,7 @@ class InstagramGallery extends AbstractHelper
 
     public function __invoke()
     {
-
+        // @todo
+        return;
     }
 }
