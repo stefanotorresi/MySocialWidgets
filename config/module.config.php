@@ -14,10 +14,11 @@ return [
                 'adapter' => [
                     'name'   => 'filesystem',
                     'options' => [
-                        'ttl'       => 300,
-                        'namespace'       => __NAMESPACE__,
-                        'cache_dir'       => './data/cache',
-                        'dir_permission'  => 0777,
+                        'ttl' => 300,
+                        'dir_level' => 0,
+                        'namespace' => __NAMESPACE__,
+                        'cache_dir' => './data/cache',
+                        'dir_permission' => 0777,
                         'file_permission' => '0666',
                     ],
                 ],

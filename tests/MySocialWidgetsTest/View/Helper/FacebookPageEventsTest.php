@@ -27,16 +27,22 @@ class FacebookPageEventsTest extends \PHPUnit_Framework_TestCase
 
         $view = new PhpRenderer();
         $view->setResolver(new TemplateMapResolver([
-            FacebookPageEvents::DEFAULT_PARTIAL => __DIR__ . '/_files/facebook-page-events.phtml'
+            $this->helper->getOptions()['partial'] => __DIR__ . '/_files/facebook-page-events.phtml'
         ]));
 
         $this->helper->setView($view);
     }
 
-    public function testHelper()
+    public function testFluentInterface()
+    {
+        $helper = $this->helper;
+        $this->assertInstanceOf('MySocialWidgets\View\Helper\FacebookPageEvents', $helper());
+    }
+
+    public function testInvoke()
     {
         // @todo store test access token somewhere else, use a mock client when no access token is provided available
-        $output = $this->helper->__invoke('ZendTechnologies', '610378295660439|DbyrApf0Cf2JKwjv_tTy58XBINs');
+        $output = $this->helper->__invoke('ZendTechnologies', ['params' => ['access_token' => '610378295660439|DbyrApf0Cf2JKwjv_tTy58XBINs']]);
         $this->assertRegExp('/(<div>.*?<\/div>)+/', $output);
     }
 
@@ -45,7 +51,7 @@ class FacebookPageEventsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongAccessTokenThrowsException()
     {
-        $output = $this->helper->__invoke('ZendTechnologies', 'foobar');
+        $output = $this->helper->__invoke('ZendTechnologies', ['params' => ['access_token' => 'foo']]);
     }
 
     public function testCacheHit()

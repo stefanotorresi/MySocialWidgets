@@ -8,34 +8,62 @@
 namespace MySocialWidgets\View\Helper;
 
 use MySocialWidgets\Exception\ClientException;
+use Zend\Stdlib\ArrayUtils;
 
 class FacebookPageEvents extends AbstractSocialHelper
 {
-    const DEFAULT_PARTIAL = 'my-social-widgets/facebook-page-events';
+    protected $options = [
+        'partial' => 'my-social-widgets/facebook-page-events',
+        'params' => [
+            'access_token' => null, // @todo make access_token retrievable from the module config
+            'fields' => 'id,name,location,start_time,description,cover',
+        ],
+    ];
 
-    public function __invoke($pageId, $accessToken, $partial = null)
+    public function __invoke($pageId = null, $options = [])
     {
-        $this->client->setParameterGet(['access_token' => $accessToken]);
+        if ($pageId === null) {
+            return $this;
+        }
+
+        if (!empty($options)) {
+            $this->options = ArrayUtils::merge($this->options, $options);
+        }
 
         $record = $this->getRecord($pageId);
 
-        if (!$partial) {
-            $partial = static::DEFAULT_PARTIAL;
-        }
+        return $this->getView()->partial($this->options['partial'], ['record' => $record]);
+    }
 
-        return $this->getView()->partial($partial, ['record' => $record]);
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function setOptions($options)
+    {
+        $this->options = $options;
+
+        return $this;
     }
 
     // @todo move the whole http client logic in service layer
     protected function getRecord($pageId)
     {
-        $cacheKey = crc32(__CLASS__.$pageId);
+        $cacheKey = md5(serialize([
+            __CLASS__,
+            $pageId,
+            $this->options['params']
+        ]));
 
         $responseContent = $this->cache->getItem($cacheKey);
 
         if (!$responseContent) {
-            $endpoint = $pageId.'/events';
-            $this->client->setUri($this->client->getUri().$endpoint);
+
+            $apiUri = $this->client->getUri();
+            $endpoint = $apiUri.$pageId.'/events';
+
+            $this->client->setUri($endpoint)->setParameterGet($this->options['params']);
 
             $response = $this->client->send();
             $responseContent = json_decode($response->getBody());
