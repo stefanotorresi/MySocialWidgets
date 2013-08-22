@@ -1,17 +1,12 @@
 <?php
 /**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ *
  * @author Stefano Torresi (http://stefanotorresi.it)
  * @license See the file LICENSE.txt for copying permission.
  * ************************************************
  */
 
-namespace MySocialWidgets\View\Helper;
-
-class InstagramGallery extends AbstractSocialHelper
-{
-    public function __invoke()
-    {
-        // @todo
-        return;
-    }
-}
+foreach ($this->record->data as $event) :
+    echo '<div>'.$event->name.'</div>';
+endforeach;

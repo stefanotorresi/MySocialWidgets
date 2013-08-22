@@ -8,7 +8,6 @@
 namespace MySocialWidgetsTest\Factory;
 
 use MySocialWidgets\Factory\ClientAbstractFactory;
-use MySocialWidgets\Factory\ViewHelperAbstractFactory;
 use PHPUnit_Framework_TestCase;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
@@ -21,7 +20,7 @@ use Zend\ServiceManager\ServiceManager;
  * @property \Zend\ServiceManager\ServiceManager serviceManager
  * @property DefaultListenerAggregate defaultListener
  */
-class ViewHelperAbstractFactoryTest extends PHPUnit_Framework_TestCase
+class ClientAbstractFactoryTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -46,22 +45,45 @@ class ViewHelperAbstractFactoryTest extends PHPUnit_Framework_TestCase
         $sm = new ServiceManager();
         $sm->setService('ModuleManager', $mm);
 
-        $sm->setService('MySocialWidgets\CacheAdapter', $this->getMock('\Zend\Cache\Storage\Adapter\Filesystem'));
-        $sm->addAbstractFactory(new ClientAbstractFactory());
-
         $this->serviceManager = $sm;
     }
 
     public function testFactory()
     {
-        $factory = new ViewHelperAbstractFactory();
+        $factory = new ClientAbstractFactory();
 
         $this->serviceManager->addAbstractFactory($factory);
 
-        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'InstagramGallery'));
-        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'instagramGallery'));
+        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'MySocialWidgets\Client\Facebook'));
+        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'MySocialWidgets\Client\Foursquare'));
+        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'MySocialWidgets\Client\Instagram'));
 
-        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->serviceManager->get('InstagramGallery'));
-        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->serviceManager->get('instagramGallery'));
+        $this->assertInstanceOf('Zend\Http\Client', $this->serviceManager->get('MySocialWidgets\Client\Facebook'));
+        $this->assertInstanceOf('Zend\Http\Client', $this->serviceManager->get('MySocialWidgets\Client\Foursquare'));
+        $this->assertInstanceOf('Zend\Http\Client', $this->serviceManager->get('MySocialWidgets\Client\Instagram'));
+    }
+
+    /**
+     * @expectedException \Zend\ServiceManager\Exception\ServiceNotFoundException
+     */
+    public function testFailToCreateUnsupportedService()
+    {
+        $factory = new ClientAbstractFactory();
+
+        $this->serviceManager->addAbstractFactory($factory);
+
+        $client = $this->serviceManager->get('MySocialWidgets\Client\ASocialNetworkYetToBeInvented');
+    }
+
+    /**
+     * @expectedException \Zend\ServiceManager\Exception\ServiceNotFoundException
+     */
+    public function testFailToCreateServiceWithWrongNamespace()
+    {
+        $factory = new ClientAbstractFactory();
+
+        $this->serviceManager->addAbstractFactory($factory);
+
+        $client = $this->serviceManager->get('AnotherNamespace\Client\Facebook');
     }
 }

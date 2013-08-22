@@ -24,13 +24,31 @@ return [
             ],
         ],
         'registered_helpers' => [
-            'InstagramGallery'
+            'FacebookPageEvents',
+            'InstagramGallery',
+        ],
+        'clients' => [
+            'facebook' => [
+                'url' => 'https://graph.facebook.com/',
+                'options' => [],
+            ],
+            'foursquare' =>  [
+                'url' => 'https://api.foursquare.com/v2/',
+                'options' => [],
+            ],
+            'instagram' =>  [
+                'url' => 'https://api.instagram.com/v1/',
+                'options' => [],
+            ],
         ],
     ],
 
     'service_manager' => [
         'factoris' => [
             __NAMESPACE__ . '\CacheAdapter' => __NAMESPACE__ . '\Factory\CacheAdapterFactory',
+        ],
+        'abstract_factories' => [
+            __NAMESPACE__ . '\Factory\ClientAbstractFactory'
         ],
     ],
 

@@ -5,13 +5,9 @@
  * ************************************************
  */
 
-namespace MySocialWidgets\View\Helper;
+namespace MySocialWidgets\Exception;
 
-class InstagramGallery extends AbstractSocialHelper
+class ClientException extends \Exception
 {
-    public function __invoke()
-    {
-        // @todo
-        return;
-    }
+
 }
