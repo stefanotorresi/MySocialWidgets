@@ -16,6 +16,7 @@ use Zend\ModuleManager\Listener\DefaultListenerAggregate;
 use Zend\ModuleManager\Listener\ListenerOptions;
 use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\ServiceManager;
+use Zend\View\HelperPluginManager;
 
 /**
  * @property \Zend\ServiceManager\ServiceManager serviceManager
@@ -49,19 +50,22 @@ class ViewHelperAbstractFactoryTest extends PHPUnit_Framework_TestCase
         $sm->setService('MySocialWidgets\CacheAdapter', $this->getMock('\Zend\Cache\Storage\Adapter\Filesystem'));
         $sm->addAbstractFactory(new ClientAbstractFactory());
 
-        $this->serviceManager = $sm;
+        $helperManager = new HelperPluginManager();
+        $helperManager->setServiceLocator($sm);
+
+        $this->helperManager = $helperManager;
     }
 
     public function testFactory()
     {
         $factory = new ViewHelperAbstractFactory();
 
-        $this->serviceManager->addAbstractFactory($factory);
+        $this->helperManager->addAbstractFactory($factory);
 
-        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'InstagramGallery'));
-        $this->assertTrue($factory->canCreateServiceWithName($this->serviceManager, '', 'instagramGallery'));
+        $this->assertTrue($factory->canCreateServiceWithName($this->helperManager, '', 'InstagramGallery'));
+        $this->assertTrue($factory->canCreateServiceWithName($this->helperManager, '', 'instagramGallery'));
 
-        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->serviceManager->get('InstagramGallery'));
-        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->serviceManager->get('instagramGallery'));
+        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->helperManager->get('InstagramGallery'));
+        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->helperManager->get('instagramGallery'));
     }
 }

@@ -23,7 +23,10 @@ class ViewHelperAbstractFactory implements AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $registeredHelpers = $serviceLocator->get('ModuleManager')->getModule('MySocialWidgets')->getOptions('registered_helpers');
+        $registeredHelpers = $serviceLocator->getServiceLocator()
+            ->get('ModuleManager')
+            ->getModule('MySocialWidgets')
+            ->getOptions('registered_helpers');
 
         return in_array(strtolower($requestedName), array_map('strtolower', $registeredHelpers));
     }
@@ -38,12 +41,13 @@ class ViewHelperAbstractFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $cacheAdapter = $serviceLocator->get('MySocialWidgets\CacheAdapter');
+        $seviceManager = $serviceLocator->getServiceLocator();
+        $cacheAdapter = $seviceManager->get('MySocialWidgets\CacheAdapter');
         $fqcn = '\MySocialWidgets\View\Helper\\'. $requestedName;
 
         $clientName = preg_split('/(?<=[a-z])(?=[A-Z])/', $requestedName)[0];
 
-        $client = $serviceLocator->get('MySocialWidgets\Client\\'.$clientName);
+        $client = $seviceManager->get('MySocialWidgets\Client\\'.$clientName);
 
         $helper = new $fqcn($client, $cacheAdapter);
 

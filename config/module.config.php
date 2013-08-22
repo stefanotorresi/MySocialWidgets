@@ -44,7 +44,7 @@ return [
     ],
 
     'service_manager' => [
-        'factoris' => [
+        'factories' => [
             __NAMESPACE__ . '\CacheAdapter' => __NAMESPACE__ . '\Factory\CacheAdapterFactory',
         ],
         'abstract_factories' => [
