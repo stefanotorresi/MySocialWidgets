@@ -43,7 +43,7 @@ class ViewHelperAbstractFactory implements AbstractFactoryInterface
     {
         $seviceManager = $serviceLocator->getServiceLocator();
         $cacheAdapter = $seviceManager->get('MySocialWidgets\CacheAdapter');
-        $fqcn = '\MySocialWidgets\View\Helper\\'. $requestedName;
+        $fqcn = '\MySocialWidgets\View\Helper\\'. ucfirst($requestedName);
 
         $clientName = preg_split('/(?<=[a-z])(?=[A-Z])/', $requestedName)[0];
 

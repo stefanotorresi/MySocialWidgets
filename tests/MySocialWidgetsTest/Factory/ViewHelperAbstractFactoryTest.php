@@ -63,9 +63,7 @@ class ViewHelperAbstractFactoryTest extends PHPUnit_Framework_TestCase
         $this->helperManager->addAbstractFactory($factory);
 
         $this->assertTrue($factory->canCreateServiceWithName($this->helperManager, '', 'InstagramGallery'));
-        $this->assertTrue($factory->canCreateServiceWithName($this->helperManager, '', 'instagramGallery'));
 
-        $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->helperManager->get('InstagramGallery'));
         $this->assertInstanceOf('MySocialWidgets\View\Helper\InstagramGallery', $this->helperManager->get('instagramGallery'));
     }
 }
