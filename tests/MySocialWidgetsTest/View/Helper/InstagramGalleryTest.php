@@ -16,9 +16,9 @@ class InstagramGalleryTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->cache = $this->getMock('\Zend\Cache\Storage\Adapter\Memory');
         $this->client = $this->getMock('\Zend\Http\Client');
-        $this->helper = new InstagramGallery($this->cache, $this->client);
+        $this->cache = $this->getMock('\Zend\Cache\Storage\Adapter\Memory');
+        $this->helper = new InstagramGallery($this->client, $this->cache);
     }
 
     public function testHelper()

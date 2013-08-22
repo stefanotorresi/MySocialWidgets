@@ -24,12 +24,14 @@ abstract class AbstractSocialHelper extends AbstractHelper
     protected $client;
 
     /**
-     * @param AbstractAdapter $cacheAdapter
+     * @todo move the whole http client logic in a service layer
+     *
      * @param Client          $client
+     * @param AbstractAdapter $cacheAdapter
      */
-    public function __construct(AbstractAdapter $cacheAdapter, Client $client)
+    public function __construct(Client $client, AbstractAdapter $cacheAdapter = null)
     {
-        $this->cache = $cacheAdapter;
         $this->client = $client;
+        $this->cache = $cacheAdapter;
     }
 }

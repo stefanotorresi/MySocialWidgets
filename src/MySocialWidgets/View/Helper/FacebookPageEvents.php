@@ -26,6 +26,7 @@ class FacebookPageEvents extends AbstractSocialHelper
         return $this->getView()->renderPartial($partial, ['record' => $record]);
     }
 
+    // @todo move the whole http client logic in service layer
     protected function getRecord($pageId)
     {
         $cacheKey = crc32(__CLASS__.$pageId);

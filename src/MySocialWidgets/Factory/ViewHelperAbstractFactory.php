@@ -45,7 +45,7 @@ class ViewHelperAbstractFactory implements AbstractFactoryInterface
 
         $client = $serviceLocator->get('MySocialWidgets\Client\\'.$clientName);
 
-        $helper = new $fqcn($cacheAdapter, $client);
+        $helper = new $fqcn($client, $cacheAdapter);
 
         return $helper;
     }

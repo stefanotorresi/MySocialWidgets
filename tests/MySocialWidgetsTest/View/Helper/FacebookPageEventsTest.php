@@ -21,12 +21,10 @@ class FacebookPageEventsTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->cache = new \Zend\Cache\Storage\Adapter\Memory;
-
         // @todo mock the client
         $this->client = new \Zend\Http\Client('https://graph.facebook.com/', ['sslverifypeer' => false]);
-
-        $this->helper = new FacebookPageEvents($this->cache, $this->client);
+        $this->cache = new \Zend\Cache\Storage\Adapter\Memory;
+        $this->helper = new FacebookPageEvents($this->client, $this->cache);
 
         $view = new PhpRenderer();
         $view->setResolver(new TemplateMapResolver([
