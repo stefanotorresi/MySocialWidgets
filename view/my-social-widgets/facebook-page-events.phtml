@@ -7,6 +7,24 @@
  * ************************************************
  */
 
-foreach ($this->record->data as $event) :
-    echo '<div>'.$event->name.'</div>';
-endforeach;
+?>
+<div>
+<?php foreach ($this->record->data as $event) : ?>
+    <div>
+        <figure>
+            <img src="<?= $this->escapeHtmlAttr($event->cover->source) ?>">
+        </figure>
+        <h3><?= $this->escapeHtml($event->name) ?></h3>
+        <time datetime="<?= $this->escapeHtmlAttr($event->start_time) ?>">
+            <?= $this->dateFormat(
+                new DateTime($event->start_time),
+                IntlDateFormatter::NONE,
+                IntlDateFormatter::NONE,
+                null,
+                'd MMMM yyyy HH:mm'
+            ) ?>
+        </time>
+        <p><?= nl2br($this->escapeHtml($event->description)) ?></p>
+    </div>
+<?php endforeach; ?>
+</div>
