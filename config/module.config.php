@@ -21,6 +21,7 @@ return [
                         'file_permission' => '0666',
                     ],
                 ],
+                'plugins' => [ 'Serializer' ],
             ],
         ],
         'registered_helpers' => [
