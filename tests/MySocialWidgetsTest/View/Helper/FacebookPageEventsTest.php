@@ -8,7 +8,6 @@
 namespace MySocialWidgetsTest\View\Helper;
 
 use MySocialWidgets\View\Helper\FacebookPageEvents;
-use Zend\View\Helper\Partial;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;
 
@@ -31,10 +30,6 @@ class FacebookPageEventsTest extends \PHPUnit_Framework_TestCase
             FacebookPageEvents::DEFAULT_PARTIAL => __DIR__ . '/_files/facebook-page-events.phtml'
         ]));
 
-        $partialHelper = new Partial();
-        $view->getHelperPluginManager()->setService('renderPartial', $partialHelper);
-
-        $partialHelper->setView($view);
         $this->helper->setView($view);
     }
 

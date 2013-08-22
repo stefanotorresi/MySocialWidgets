@@ -23,7 +23,7 @@ class FacebookPageEvents extends AbstractSocialHelper
             $partial = static::DEFAULT_PARTIAL;
         }
 
-        return $this->getView()->renderPartial($partial, ['record' => $record]);
+        return $this->getView()->partial($partial, ['record' => $record]);
     }
 
     // @todo move the whole http client logic in service layer
