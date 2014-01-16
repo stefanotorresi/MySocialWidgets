@@ -7,34 +7,9 @@
 
 namespace MySocialWidgets;
 
-use Zend\ModuleManager\Feature;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Glob;
-use ZfcBase\Module\AbstractModule;
+use MyBase\AbstractModule;
 
-class Module extends AbstractModule implements
-    Feature\ConfigProviderInterface
+class Module extends AbstractModule
 {
-    public function getConfig()
-    {
-        $config = parent::getConfig();
 
-        $configFiles = Glob::glob($this->getDir().'/config/*.config.php');
-
-        foreach ($configFiles as $configFile) {
-            $config = ArrayUtils::merge($config, include $configFile);
-        }
-
-        return $config;
-    }
-
-    public function getDir()
-    {
-        return __DIR__ . '/../..';
-    }
-
-    public function getNamespace()
-    {
-        return __NAMESPACE__;
-    }
 }

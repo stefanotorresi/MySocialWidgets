@@ -18,8 +18,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "zf-commons/zfc-base": "*",
+        "php": ">=5.4.1",
+        "stefanotorresi/my-base": "1.*",
         "zendframework/zendframework": "2.*"
     },
     "require-dev": {
