@@ -9,3 +9,6 @@ nbproject
 .sass-cache
 *.swp
 /vendor
+composer.lock
+/tests/phpunit.xml
+/tests/coverage
