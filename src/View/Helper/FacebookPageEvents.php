@@ -37,8 +37,8 @@ class FacebookPageEvents extends AbstractHelper
     }
 
     /**
-     * @param  null  $pageId
-     * @param  array $options
+     * @param  string $pageId
+     * @param  array  $options
      * @return $this
      */
     public function __invoke($pageId = null, $options = [])

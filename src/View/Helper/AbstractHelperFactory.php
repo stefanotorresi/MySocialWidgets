@@ -10,7 +10,6 @@ namespace MySocialWidgets\View\Helper;
 use MySocialWidgets\Client\AbstractClientFactory;
 use MySocialWidgets\Options\ModuleOptions;
 use Zend\Cache\StorageFactory;
-use Zend\Http\Client;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -21,8 +20,8 @@ class AbstractHelperFactory implements AbstractFactoryInterface
      * Determine if we can create a service with name
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @param $name
-     * @param $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)

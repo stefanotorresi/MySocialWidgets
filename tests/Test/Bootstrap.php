@@ -78,8 +78,8 @@ class Bootstrap
     }
 
     /**
-     * @param $path
-     * @return bool|string
+     * @param  string       $path
+     * @return false|string
      */
     protected static function findParentPath($path)
     {

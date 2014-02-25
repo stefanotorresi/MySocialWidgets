@@ -11,6 +11,9 @@ use MySocialWidgets\View\Helper\AbstractHelper;
 
 class Helper extends AbstractHelper
 {
+    /**
+     * @param string $item
+     */
     public function generateCacheKey($item)
     {
         return parent::generateCacheKey($item);
