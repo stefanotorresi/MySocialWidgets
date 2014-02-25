@@ -8,7 +8,6 @@
 namespace MySocialWidgets\Test\View\Helper;
 
 use MySocialWidgets\View\Helper\FacebookPageEvents;
-use ReflectionMethod;
 use Zend\Http\Response;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;

@@ -10,7 +10,6 @@ namespace MySocialWidgets\Test\View\Helper;
 use MySocialWidgets\Test\Bootstrap;
 use MySocialWidgets\View\Helper\AbstractHelperFactory;
 use PHPUnit_Framework_TestCase;
-use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
 
 class AbstractHelperFactoryTest extends PHPUnit_Framework_TestCase

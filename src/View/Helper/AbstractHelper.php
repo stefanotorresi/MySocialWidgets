@@ -37,7 +37,7 @@ abstract class AbstractHelper extends ZendAbstractHelper
     /**
      * @todo move deps in a service layer
      *
-     * @param Client          $client
+     * @param Client       $client
      * @param CacheAdapter $cacheAdapter
      */
     public function __construct(Client $client, CacheAdapter $cacheAdapter = null)
@@ -56,7 +56,7 @@ abstract class AbstractHelper extends ZendAbstractHelper
     }
 
     /**
-     * @param Client $client
+     * @param  Client $client
      * @return $this
      */
     public function setClient($client)
@@ -79,7 +79,7 @@ abstract class AbstractHelper extends ZendAbstractHelper
     }
 
     /**
-     * @param mixed $defaultOptions
+     * @param  mixed $defaultOptions
      * @return $this
      */
     public function setDefaultOptions($defaultOptions)
@@ -102,7 +102,7 @@ abstract class AbstractHelper extends ZendAbstractHelper
     }
 
     /**
-     * @param CacheAdapter $cache
+     * @param  CacheAdapter $cache
      * @return $this
      */
     public function setCache($cache)

@@ -8,7 +8,6 @@
 namespace MySocialWidgets\View\Helper;
 
 use MySocialWidgets\Client\ClientException;
-use MySocialWidgets\Options\HelperOptions;
 use Zend\Cache\Storage\Adapter\AbstractAdapter as CacheAdapter;
 use Zend\Http\Client;
 use Zend\Stdlib\ArrayUtils;
@@ -21,7 +20,7 @@ class FacebookPageEvents extends AbstractHelper
     protected $cacheKey;
 
     /**
-     * @param Client $client
+     * @param Client       $client
      * @param CacheAdapter $cacheAdapter
      */
     public function __construct(Client $client, CacheAdapter $cacheAdapter = null)
@@ -37,10 +36,9 @@ class FacebookPageEvents extends AbstractHelper
         parent::__construct($client, $cacheAdapter);
     }
 
-
     /**
-     * @param null $pageId
-     * @param array $options
+     * @param  null  $pageId
+     * @param  array $options
      * @return $this
      */
     public function __invoke($pageId = null, $options = [])
