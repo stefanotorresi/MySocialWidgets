@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=5.4.1",
-        "zf-commons/zfc-base": "*",
+        "stefanotorresi/my-base": "1.*",
         "zendframework/zendframework": "2.*"
     },
     "extra": {
@@ -28,8 +28,9 @@
         }
     },
     "autoload": {
-        "psr-0": {
-            "MySocialWidgets": "src/"
+        "psr-4": {
+            "MySocialWidgets\\": "src/",
+            "MySocialWidgets\\Test\\": "tests/Test"
         },
         "classmap": [
             "./"

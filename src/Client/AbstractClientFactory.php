@@ -5,13 +5,14 @@
  * ************************************************
  */
 
-namespace MySocialWidgets\Factory;
+namespace MySocialWidgets\Client;
 
+use MySocialWidgets\Options\ModuleOptions;
 use Zend\Http\Client;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ClientAbstractFactory implements AbstractFactoryInterface
+class AbstractClientFactory implements AbstractFactoryInterface
 {
     const CLIENT_NAMESPACE = 'MySocialWidgets\Client';
 
@@ -25,11 +26,12 @@ class ClientAbstractFactory implements AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $registeredClients = $serviceLocator->get('ModuleManager')->getModule('MySocialWidgets')->getOptions('clients');
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceLocator->get('MySocialWidgets\Options\ModuleOptions');
 
-        $namespace = substr($requestedName, 0, strrpos($requestedName, '\\'));
+        $registeredClients = $moduleOptions->getClients();
 
-        if ($namespace !== self::CLIENT_NAMESPACE) {
+        if (strpos($requestedName, self::CLIENT_NAMESPACE) !== 0) {
             return false;
         }
 
@@ -49,7 +51,10 @@ class ClientAbstractFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $registeredClients = $serviceLocator->get('ModuleManager')->getModule('MySocialWidgets')->getOptions('clients');
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceLocator->get('MySocialWidgets\Options\ModuleOptions');
+
+        $registeredClients = $moduleOptions->getClients();
 
         $clientName = $this->getClientName($requestedName);
         $config = $registeredClients[$clientName];

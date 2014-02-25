@@ -5,13 +5,9 @@
  * ************************************************
  */
 
-namespace MySocialWidgets\View\Helper;
+error_reporting(E_ALL | E_STRICT);
+chdir(dirname(__DIR__));
 
-class InstagramGallery extends AbstractSocialHelper
-{
-    public function __invoke()
-    {
-        // @todo
-        return;
-    }
-}
+require __DIR__ . '/Test/Bootstrap.php';
+
+MySocialWidgets\Test\Bootstrap::init();

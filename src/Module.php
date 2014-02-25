@@ -5,9 +5,11 @@
  * ************************************************
  */
 
-namespace MySocialWidgets\Exception;
+namespace MySocialWidgets;
 
-class ClientException extends \Exception
+use MyBase\AbstractModule;
+
+class Module extends AbstractModule
 {
 
 }

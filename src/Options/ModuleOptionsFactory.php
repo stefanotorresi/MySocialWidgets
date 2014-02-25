@@ -5,27 +5,23 @@
  * ************************************************
  */
 
-namespace MySocialWidgets\Factory;
+namespace MySocialWidgets\Options;
 
-use Zend\Cache\Storage\Adapter\AbstractAdapter;
-use Zend\Cache\StorageFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CacheAdapterFactory implements FactoryInterface
+class ModuleOptionsFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return AbstractAdapter
+     * @return ModuleOptions
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('ModuleManager')->getModule('MySocialWidgets')->getOption('cache');
+        $config = $serviceLocator->get('config')['MySocialWidgets'];
 
-        $cacheAdapter = StorageFactory::factory($config);
-
-        return $cacheAdapter;
+        return new ModuleOptions($config);
     }
 }
